@@ -1,0 +1,35 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>Clients</title>
+    <script src="Scripts/jquery-3.4.1.min.js"></script>
+    <script type=" text/javascript">
+        $(document).ready(function(){
+            var ulClients = $('#ulCLients');
+            $('#btn').click(function(){
+                $.ajax({
+                    type: 'GET',
+                    url: 'api/Clients',
+                    dataType: 'json',
+                    success : function(data){
+                        ulClients.empty();
+                        $.each(data, function(index, val){
+                            var fullName = val.First_name + ' ' + val.Last_name;
+                            ulClients.append('<li>'+ fullName + '</li>')
+                        });
+                    }
+                });
+            });
+            $('#btnClr').click(function(){
+                ulClients.emppty();
+            });
+        });
+    </script>
+</head>
+<body>
+    <input id="btn" type="button" value="List all Clients" />
+    <input id="btnClr" type="button" value="Clear" />
+    <ul id="ulClients"></ul>
+</body>
+</html>
